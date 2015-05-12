@@ -1,0 +1,10 @@
+{
+	"fileVersion": 1,
+	"versions": {
+		"dstep": "0.1.1",
+		"dstack": "0.0.2",
+		"tango": "1.0.0+2.066",
+		"openssl": "1.1.4+1.0.1g",
+		"mambo": "0.0.3"
+	}
+}
