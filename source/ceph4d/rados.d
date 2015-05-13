@@ -1,6 +1,7 @@
 module ceph4d.rados;
 
 
+
 /*
 * Ceph - scalable distributed file system
 *
@@ -791,3 +792,27 @@ int rados_aio_create_completion(void *cb_arg,
                                                rados_callback_t cb_complete,
                                                rados_callback_t cb_safe,
 											   rados_completion_t *pc);
+
+/**
+* Delete an object
+* @note This does not delete any snapshots of the object.
+* @param io the pool to delete the object from
+* @param oid the name of the object to delete
+* @returns 0 on success, negative error code on failure
+*/
+int rados_remove(rados_ioctx_t io, const char *oid);
+
+/**
+* Read data from an object
+* The io context determines the snapshot to read from, if any was set
+* by rados_ioctx_snap_set_read().
+* @param io the context in which to perform the read
+* @param oid the name of the object to read from
+* @param buf where to store the results
+* @param len the number of bytes to read
+* @param off the offset to start reading from in the object
+* @returns number of bytes read on success, negative error code on
+* failure
+*/
+int rados_read(rados_ioctx_t io, const char *oid, char *buf,
+                              size_t len, uint64_t off);

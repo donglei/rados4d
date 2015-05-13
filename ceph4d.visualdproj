@@ -106,7 +106,8 @@
    <Folder name="source">
     <Folder name="ceph4d">
      <File path="source\ceph4d\rados.d" />
-     <File path="source\ceph4d\radostypes..d" />
+     <File path="source\ceph4d\radosclient.d" />
+     <File path="source\ceph4d\radostypes.d" />
     </Folder>
     <File path="source\app.d" />
    </Folder>
@@ -118,7 +119,7 @@
      <File tool="None" path="c:\users\developer\appdata\roaming\dub\packages\openssl-1.1.4_1.0.1g\deimos\openssl\aes.d" />
      <File tool="None" path="c:\users\developer\appdata\roaming\dub\packages\openssl-1.1.4_1.0.1g\deimos\openssl\asn1.d" />
      <File tool="None" path="C:\Users\developer\AppData\Roaming\dub\packages\openssl-1.1.4_1.0.1g\deimos\openssl\asn1t.d" />
-     <File tool="None" path="C:\Users\developer\AppData\Roaming\dub\packages\openssl-1.1.4_1.0.1g\deimos\openssl\asn1_mac.d" />
+     <File tool="None" path="c:\users\developer\appdata\roaming\dub\packages\openssl-1.1.4_1.0.1g\deimos\openssl\asn1_mac.d" />
      <File tool="None" path="C:\Users\developer\AppData\Roaming\dub\packages\openssl-1.1.4_1.0.1g\deimos\openssl\bio.d" />
      <File tool="None" path="C:\Users\developer\AppData\Roaming\dub\packages\openssl-1.1.4_1.0.1g\deimos\openssl\blowfish.d" />
      <File tool="None" path="C:\Users\developer\AppData\Roaming\dub\packages\openssl-1.1.4_1.0.1g\deimos\openssl\bn.d" />
