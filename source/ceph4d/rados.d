@@ -712,16 +712,7 @@ int rados_pool_create_with_crush_rule(rados_t cluster,const char *pool_name, uin
 */
 int rados_write(rados_ioctx_t io, const char *oid,const char *buf, size_t len, uint64_t off);
 
-/**
-* Set an extended attribute on an object.
-* @param io the context in which xattr is set
-* @param o name of the object
-* @param name which extended attribute to set
-* @param buf what to store in the xattr
-* @param len the number of bytes in buf
-* @returns 0 on success, negative error code on failure
-*/
-int rados_setxattr(rados_ioctx_t io, const char *o,const char *name, const char *buf, size_t len);
+
 
 alias void *rados_completion_t;
 /**
@@ -816,3 +807,86 @@ int rados_remove(rados_ioctx_t io, const char *oid);
 */
 int rados_read(rados_ioctx_t io, const char *oid, char *buf,
                               size_t len, uint64_t off);
+
+
+
+/**
+* @defgroup librados_h_xattrs Xattrs
+* Extended attributes are stored as extended attributes on the files
+* representing an object on the OSDs. Thus, they have the same
+* limitations as the underlying filesystem. On ext4, this means that
+* the total data stored in xattrs cannot exceed 4KB.
+*
+* @{
+*/
+
+/**
+* Get the value of an extended attribute on an object.
+* @param io the context in which the attribute is read
+* @param o name of the object
+* @param name which extended attribute to read
+* @param buf where to store the result
+* @param len size of buf in bytes
+* @returns length of xattr value on success, negative error code on failure
+*/
+ int rados_getxattr(rados_ioctx_t io, const char *o,
+                                  const char *name, char *buf, size_t len);
+
+/**
+* Set an extended attribute on an object.
+* @param io the context in which xattr is set
+* @param o name of the object
+* @param name which extended attribute to set
+* @param buf what to store in the xattr
+* @param len the number of bytes in buf
+* @returns 0 on success, negative error code on failure
+*/
+ int rados_setxattr(rados_ioctx_t io, const char *o,
+                                  const char *name, const char *buf,
+                                  size_t len);
+
+/**
+* Delete an extended attribute from an object.
+* @param io the context in which to delete the xattr
+* @param o the name of the object
+* @param name which xattr to delete
+* @returns 0 on success, negative error code on failure
+*/
+ int rados_rmxattr(rados_ioctx_t io, const char *o,
+                                 const char *name);
+
+/**
+* Start iterating over xattrs on an object.
+* @post iter is a valid iterator
+* @param io the context in which to list xattrs
+* @param oid name of the object
+* @param iter where to store the iterator
+* @returns 0 on success, negative error code on failure
+*/
+ int rados_getxattrs(rados_ioctx_t io, const char *oid,
+                                   rados_xattrs_iter_t *iter);
+
+/**
+* Get the next xattr on the object
+* @pre iter is a valid iterator
+* @post name is the NULL-terminated name of the next xattr, and val
+* contains the value of the xattr, which is of length len. If the end
+* of the list has been reached, name and val are NULL, and len is 0.
+* @param iter iterator to advance
+* @param name where to store the name of the next xattr
+* @param val where to store the value of the next xattr
+* @param len the number of bytes in val
+* @returns 0 on success, negative error code on failure
+*/
+ int rados_getxattrs_next(rados_xattrs_iter_t iter,
+                                        const char **name, const char **val,
+                                        size_t *len);
+
+/**
+* Close the xattr iterator.
+* iter should not be used after this is called.
+* @param iter the iterator to close
+*/
+ void rados_getxattrs_end(rados_xattrs_iter_t iter);
+
+/** @} Xattrs */
